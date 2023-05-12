@@ -115,6 +115,7 @@ public class UserDao {
         return usersList.get(0);
     }
 
+    @Transactional
     public void updateUser(long id, String name, String lastname, byte age) {
         try {
             EntityManager em = entityManagerFactory.createEntityManager();
@@ -138,6 +139,7 @@ public class UserDao {
         }
     }
 
+    @Transactional
     public void deleteUserById(long id) {
         try {
             EntityManager em = entityManagerFactory.createEntityManager();
