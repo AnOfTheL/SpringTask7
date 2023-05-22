@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.UserService;
+import web.service.UserServiceImpl;
 
 @Controller
 @RequestMapping("/users")
@@ -13,13 +14,13 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    public void setUserService(UserService userService) {
+    public void setUserService(UserServiceImpl userService) {
         this.userService = userService;
     }
 
     @GetMapping()
     public String index(ModelMap model){
-        model.addAttribute("users", userService.printUsers());
+        model.addAttribute("users", userService.getAllUsers());
         return "index";
     }
 

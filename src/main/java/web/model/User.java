@@ -15,8 +15,7 @@ public class User {
     @Column
     private byte age;
 
-    public User(long id, String name, String lastname, byte age) {
-        this.id = id;
+    public User(String name, String lastname, byte age) {
         this.name = name;
         this.lastname = lastname;
         this.age = age;
@@ -24,6 +23,18 @@ public class User {
 
     public User() {
 
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public void setAge(byte age) {
+        this.age = age;
     }
 
     public long getId() {

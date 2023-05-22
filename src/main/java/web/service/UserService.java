@@ -1,46 +1,21 @@
 package web.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import web.dao.UserDao;
 import web.model.User;
 
 import java.util.List;
 
-@Component
-public class UserService {
+public interface UserService {
+    void createUsersTable();
 
-    private UserDao userDao;
+    void dropUsersTable();
 
-    @Autowired
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
+    void saveUser(String name, String lastName, byte age);
 
-    public void createUsersTable() {
-        userDao.createUsersTable();
-    }
+    void deleteUserById(long id);
 
-    public void saveUser(String name, String lastName, byte age) {
-        userDao.saveUser(name, lastName, age);
-    }
+    List<User> getAllUsers();
 
-    public List<User> printUsers(){
-        //userDao.dropUsersTable();
-        //userDao.createUsersTable();
-        //userDao.saveUser("name", "lastName", (byte) 21);
-        return userDao.getAllUsers();
-    }
+    void updateUser(long id, String name, String lastname, byte age);
 
-    public User getUserById(long id) {
-        return userDao.getUserById(id);
-    }
-
-    public void updateUser(long id, String name, String lastName, byte age) {
-        userDao.updateUser(id, name, lastName, age);
-    }
-
-    public void deleteUserById(long id) {
-        userDao.deleteUserById(id);
-    }
+    User getUserById(long id);
 }
