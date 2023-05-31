@@ -11,12 +11,9 @@ import web.service.UserServiceImpl;
 @Controller
 @RequestMapping("/users")
 public class UserController {
-    private UserService userService;
-
     @Autowired
-    public void setUserService(UserServiceImpl userService) {
-        this.userService = userService;
-    }
+    private UserService userService;
+    private User user;
 
     @GetMapping()
     public String index(ModelMap model){
@@ -40,7 +37,8 @@ public class UserController {
                          @RequestParam("lastname") String lastname,
                          @RequestParam("age") byte age)
     {
-        userService.saveUser(name, lastname, age);
+        user = new User(name, lastname, age);
+        userService.saveUser(user);
         return "redirect:/users";
     }
 

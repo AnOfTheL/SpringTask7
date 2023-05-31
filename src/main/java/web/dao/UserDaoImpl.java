@@ -13,44 +13,21 @@ import java.util.List;
 
 
 @Repository
-@Transactional
 public class UserDaoImpl implements UserDao {
     @PersistenceContext
     private EntityManager em;
-    private EntityTransaction tx = null;
 
     @Override
-    public void createUsersTable() {
-        em.createNativeQuery("" +
-                        "CREATE TABLE IF NOT EXISTS users ( " +
-                        "id SERIAL PRIMARY KEY, " +
-                        "name VARCHAR(255), " +
-                        "lastname VARCHAR(255), " +
-                        "age SMALLINT);" +
-                        "")
-                .executeUpdate();
-    }
-
-    @Override
-    public void saveUser(String name, String lastName, byte age) {
-        User user = new User(name, lastName, age);
-        em.joinTransaction();
+    public void saveUser(User user) {
         em.persist(user);
         em.flush();
     }
 
     @Override
-    public void dropUsersTable() {
-        em.createNativeQuery("DROP TABLE IF EXISTS users;")
-                .executeUpdate();
+    public List<User> getAllUsers() {
+        return em.createQuery("from User", User.class).getResultList();
     }
 
-    @Override
-    public List<User> getAllUsers() {
-        return em.createQuery(
-                "SELECT u FROM User u", User.class)
-                .getResultList();
-    }
     @Override
     public User getUserById(long id) {
         return em.find(User.class, id);
