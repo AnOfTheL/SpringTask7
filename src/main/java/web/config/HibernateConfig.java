@@ -74,7 +74,7 @@ public class HibernateConfig {
         return (entityManager == null) ? this.getEntityManagerFactory().createEntityManager() : entityManager;
     }
 
-    @Bean
+    @Bean(name = "transactionManager")
     public JpaTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(getEntityManagerFactory());

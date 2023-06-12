@@ -19,6 +19,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void saveUser(User user) {
+        em.joinTransaction();
         em.persist(user);
         em.flush();
     }
